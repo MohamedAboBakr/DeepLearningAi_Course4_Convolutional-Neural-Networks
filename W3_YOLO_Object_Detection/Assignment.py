@@ -46,7 +46,7 @@ def yolo_filter_boxes(box_confidence, boxes, box_class_probs, threshold=.6):
   return scores, boxes, classes
 
 
-'''
+
 # check point
 with tf.Session() as test_a:
   box_confidence = tf.random_normal([19, 19, 5, 1], mean=1, stddev=4, seed=1)
@@ -59,7 +59,7 @@ with tf.Session() as test_a:
   print("scores.shape = " + str(scores.shape))
   print("boxes.shape = " + str(boxes.shape))
   print("classes.shape = " + str(classes.shape))
-'''
+
 
 ###############################################################################################################################
 
@@ -124,7 +124,7 @@ def yolo_non_max_suppression(scores, boxes, classes, max_boxes=10, iou_threshold
   return scores, boxes, classes
 
 
-'''
+
 # check point
 with tf.Session() as test_b:
   scores = tf.random_normal([54, ], mean=1, stddev=4, seed=1)
@@ -137,7 +137,6 @@ with tf.Session() as test_b:
   print("scores.shape = " + str(scores.eval().shape))
   print("boxes.shape = " + str(boxes.eval().shape))
   print("classes.shape = " + str(classes.eval().shape))
-'''
 
 
 def yolo_eval(yolo_outputs, image_shape=(720., 1280.), max_boxes=10, score_threshold=.6, iou_threshold=.5):
@@ -169,7 +168,7 @@ def yolo_eval(yolo_outputs, image_shape=(720., 1280.), max_boxes=10, score_thres
   return scores, boxes, classes
 
 
-'''
+
 # check point
 with tf.Session() as test_b:
   yolo_outputs = (tf.random_normal([19, 19, 5, 1], mean=1, stddev=4, seed=1),
@@ -183,13 +182,3 @@ with tf.Session() as test_b:
   print("scores.shape = " + str(scores.eval().shape))
   print("boxes.shape = " + str(boxes.eval().shape))
   print("classes.shape = " + str(classes.eval().shape))
-
-'''
-
-# Test YOLO pretrained model on images
-sess = K.get_session()
-class_names = read_classes("model_data/coco_classes.txt")
-anchors = read_anchors("model_data/yolo_anchors.txt")
-image_shape = (720., 1280.)
-yolo_model = load_model("model_data/yolo.h5")
-print(yolo_model.summary())
